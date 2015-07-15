@@ -148,6 +148,9 @@ public class ChatFrameMain extends JFrame {
 		return;
 	}
 	
+	//处理用户操作1:选择群聊
+	
+	
 	
 	//基础线程
 	 protected abstract class BaseThread extends Thread{
@@ -182,6 +185,7 @@ public class ChatFrameMain extends JFrame {
 	//////////////////
 	//维护用户列表
 	//////////////////
+	
 	public void working(){
 		Thread updater = new Updater();
 		threadpool.submit(updater);

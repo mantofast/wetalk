@@ -1,37 +1,42 @@
 package message;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 import usermanager.User;
-         
-public class BaseMessage implements java.io.Serializable {
+
+public class GroupChatMessage implements java.io.Serializable{
+	public static final byte BUILD_GROUP_MESSAGE = 0x01;		//broadcast
+	public static final byte JION_GROUP_MESSAGE = 0x02;		    //unicast
 	
-	public static final byte SECK_SERVER_MESSAGE = 0x01;		//broadcast
-	public static final byte SECK_SERVER_ACK_MESSAGE = 0x02;	//unicast
-	public static final byte USER_GO_MESSAGE = 0x03;			//broadcast
-
 	private byte type;
-	private User USER;
-
-	public BaseMessage(byte msgtype){
+	private List<User> UserList;//群聊用户列表
+	private int port;//群聊监听端口号
+	private String GroupName;
+	
+	public  GroupChatMessage(byte msgtype,int port,String GroupName){
 		this.type = msgtype;
+		this.port=port;
+		this.GroupName=GroupName;
 	}
 	
 	public byte getType(){
 		return type;
 	}
 	
-	public void setUser(User user){
-		USER = user;
+	public void setUser(List<User> UserList){
+		this.UserList =  UserList;
 	}
 	
-	public User getUser(){
-		return USER;
+	public List<User> getUserList(){
+		return UserList;
 	}
+	
+	
+	
 	
 	@SuppressWarnings("finally")
 	public byte[] srialize(){
@@ -52,13 +57,13 @@ public class BaseMessage implements java.io.Serializable {
 				
 	}
 	@SuppressWarnings("finally")
-	public static BaseMessage deserialize(byte[] in){
+	public static GroupChatMessage deserialize(byte[] in){
 		ByteArrayInputStream bais = new ByteArrayInputStream(in);
 		ObjectInputStream ois;
-		BaseMessage msg = null;
+		GroupChatMessage msg = null;
 		try {
 			ois = new ObjectInputStream(bais);
-			msg = (BaseMessage)ois.readObject();	
+			msg = (GroupChatMessage)ois.readObject();	
 			return msg;			
 		} catch (Exception e) {
 
@@ -72,3 +77,10 @@ public class BaseMessage implements java.io.Serializable {
 
 	
 }
+
+	
+	
+	
+	
+
+
