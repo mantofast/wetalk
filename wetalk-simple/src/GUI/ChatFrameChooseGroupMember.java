@@ -36,22 +36,6 @@ public class ChatFrameChooseGroupMember extends JFrame {
 	private JTextField textField;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChatFrameChooseGroupMember frame = new ChatFrameChooseGroupMember();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public ChatFrameChooseGroupMember() {
@@ -91,6 +75,15 @@ public class ChatFrameChooseGroupMember extends JFrame {
 		JButton btnNewButton_2 = new JButton("《");
 		btnNewButton_2.setBounds(162, 105, 45, 23);
 		layeredPane.add(btnNewButton_2);
+		
+	}
+	public static void showFrameChoose(){
+		try {
+			ChatFrameChooseGroupMember frame = new ChatFrameChooseGroupMember();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 }
